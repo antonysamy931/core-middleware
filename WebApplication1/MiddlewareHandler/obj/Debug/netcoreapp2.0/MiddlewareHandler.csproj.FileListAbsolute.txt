@@ -1,0 +1,9 @@
+D:\Antony\Prakash\core handler\WebApplication1\MiddlewareHandler\bin\Debug\netcoreapp2.0\MiddlewareHandler.deps.json
+D:\Antony\Prakash\core handler\WebApplication1\MiddlewareHandler\bin\Debug\netcoreapp2.0\MiddlewareHandler.dll
+D:\Antony\Prakash\core handler\WebApplication1\MiddlewareHandler\bin\Debug\netcoreapp2.0\MiddlewareHandler.pdb
+D:\Antony\Prakash\core handler\WebApplication1\MiddlewareHandler\obj\Debug\netcoreapp2.0\MiddlewareHandler.csproj.CoreCompileInputs.cache
+D:\Antony\Prakash\core handler\WebApplication1\MiddlewareHandler\obj\Debug\netcoreapp2.0\MiddlewareHandler.AssemblyInfoInputs.cache
+D:\Antony\Prakash\core handler\WebApplication1\MiddlewareHandler\obj\Debug\netcoreapp2.0\MiddlewareHandler.AssemblyInfo.cs
+D:\Antony\Prakash\core handler\WebApplication1\MiddlewareHandler\obj\Debug\netcoreapp2.0\MiddlewareHandler.dll
+D:\Antony\Prakash\core handler\WebApplication1\MiddlewareHandler\obj\Debug\netcoreapp2.0\MiddlewareHandler.pdb
+D:\Antony\Prakash\core handler\WebApplication1\MiddlewareHandler\obj\Debug\netcoreapp2.0\MiddlewareHandler.csprojResolveAssemblyReference.cache
