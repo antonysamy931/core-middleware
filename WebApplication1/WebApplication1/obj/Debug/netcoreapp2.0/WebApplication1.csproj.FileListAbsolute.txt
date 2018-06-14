@@ -11,3 +11,6 @@ D:\Antony\Prakash\core handler\WebApplication1\WebApplication1\obj\Debug\netcore
 D:\Antony\Prakash\core handler\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.0\WebApplication1.pdb
 D:\Antony\Prakash\core handler\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.0\MiddlewareHandler.dll
 D:\Antony\Prakash\core handler\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.0\MiddlewareHandler.pdb
+D:\Antony\Prakash\core handler\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.0\DTO.dll
+D:\Antony\Prakash\core handler\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.0\DTO.pdb
+D:\Antony\Prakash\core handler\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.0\WebApplication1.xml

@@ -23,6 +23,7 @@
     ".NETCoreApp,Version=v2.0": {
       "WebApplication1/1.0.0": {
         "dependencies": {
+          "DTO": "1.0.0",
           "Microsoft.AspNetCore.All": "2.0.0",
           "Microsoft.NETCore.App": "2.0.0",
           "MiddlewareHandler": "1.0.0",
@@ -3786,6 +3787,14 @@
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
       },
+      "DTO/1.0.0": {
+        "runtime": {
+          "DTO.dll": {}
+        },
+        "compile": {
+          "DTO.dll": {}
+        }
+      },
       "MiddlewareHandler/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.All": "2.0.0",
@@ -5983,6 +5992,11 @@
       "sha512": "sha512-W6ZZ0/o7+3Qb77mRAQyLjPudHG3OMeeQ4p9yY13PUdJArmRCx2cLMm5F4tpIjJXxzHC0ew0oK7DMDGILMdfCnw==",
       "path": "windowsazure.storage/8.1.4",
       "hashPath": "windowsazure.storage.8.1.4.nupkg.sha512"
+    },
+    "DTO/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "MiddlewareHandler/1.0.0": {
       "type": "project",

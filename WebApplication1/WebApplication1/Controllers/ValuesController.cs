@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http;
+using DTO;
+using WebApplication1.CustomSwager;
 
 namespace WebApplication1.Controllers
 {
@@ -22,10 +25,15 @@ namespace WebApplication1.Controllers
         {
             return "value";
         }
-
-        // POST api/values
+        
+        /// <summary>
+        /// Post sample method.
+        /// </summary>
+        /// <param name="pRequest">Class object</param>
         [HttpPost]
-        public void Post([FromBody]string value)
+        [SwagerApi(typeof(PostRequest))]
+        [Produces("application/json")]
+        public void Post(PostRequest pRequest)
         {
         }
 

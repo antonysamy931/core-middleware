@@ -4713,6 +4713,16 @@
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
       },
+      "DTO/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/DTO.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DTO.dll": {}
+        }
+      },
       "MiddlewareHandler/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
@@ -12387,6 +12397,11 @@
         "windowsazure.storage.nuspec"
       ]
     },
+    "DTO/1.0.0": {
+      "type": "project",
+      "path": "../DTO/DTO.csproj",
+      "msbuildProject": "../DTO/DTO.csproj"
+    },
     "MiddlewareHandler/1.0.0": {
       "type": "project",
       "path": "../MiddlewareHandler/MiddlewareHandler.csproj",
@@ -12395,6 +12410,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
+      "DTO >= 1.0.0",
       "Microsoft.AspNetCore.All >= 2.0.0",
       "Microsoft.NETCore.App >= 2.0.0",
       "MiddlewareHandler >= 1.0.0",
@@ -12436,6 +12452,9 @@
           "projectReferences": {
             "D:\\Antony\\Prakash\\core handler\\WebApplication1\\MiddlewareHandler\\MiddlewareHandler.csproj": {
               "projectPath": "D:\\Antony\\Prakash\\core handler\\WebApplication1\\MiddlewareHandler\\MiddlewareHandler.csproj"
+            },
+            "D:\\Antony\\Prakash\\core handler\\WebApplication1\\DTO\\DTO.csproj": {
+              "projectPath": "D:\\Antony\\Prakash\\core handler\\WebApplication1\\DTO\\DTO.csproj"
             }
           }
         }

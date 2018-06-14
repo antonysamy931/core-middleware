@@ -5,6 +5,7 @@
   <xs:complexType name="PostRequestType">
     <xs:sequence>
       <xs:element minOccurs="1" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Last" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   

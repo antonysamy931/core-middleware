@@ -11,6 +11,8 @@ using Microsoft.Extensions.Options;
 using MiddlewareHandler;
 using System.IO;
 using Swashbuckle.AspNetCore.Swagger;
+using WebApplication1.CustomSwager;
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace WebApplication1
 {
@@ -30,9 +32,18 @@ namespace WebApplication1
         public void ConfigureServices(IServiceCollection services)
         {            
             services.AddMvc();
+            //https://github.com/domaindrivendev/Swashbuckle.AspNetCore/blob/master/README.md
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+                c.OperationFilter<CustomOperationFilter>();
+
+                //Determine base path for the application.
+                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+
+                //Set the comments path for the swagger json and ui.
+                c.IncludeXmlComments(basePath + "\\WebApplication1.xml");
+
             });
         }
 
@@ -53,7 +64,7 @@ namespace WebApplication1
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");                
             });
 
             app.UseMvc();
