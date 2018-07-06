@@ -30,20 +30,24 @@ namespace WebApplication1
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {            
+        {
+            services.
+                AddMvcCore().
+                AddJsonFormatters().
+                AddXmlSerializerFormatters();
+
             services.AddMvc();
             //https://github.com/domaindrivendev/Swashbuckle.AspNetCore/blob/master/README.md
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
-                c.OperationFilter<CustomOperationFilter>();
-
+                c.OperationFilter<CustomOperationFilter>();                
                 //Determine base path for the application.
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-
+                c.DocumentFilter<CustomDocumentFilter>();
                 //Set the comments path for the swagger json and ui.
                 c.IncludeXmlComments(basePath + "\\WebApplication1.xml");
-
+                //c.OrderActionsBy((apiDesc) => $"{apiDesc.ActionDescriptor.RouteValues["controller"]}_{apiDesc.HttpMethod}");
             });
         }
 
@@ -64,7 +68,7 @@ namespace WebApplication1
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");                
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");               
             });
 
             app.UseMvc();

@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Http;
-using DTO;
-using WebApplication1.CustomSwager;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebApplication1.Controllers
 {
-    [Route("api/[controller]/[action]")]
-    public class ValuesController : Controller
+    [Route("api/[controller]")]
+    public class SampleController : Controller
     {
-        // GET api/values
+        // GET: api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
@@ -25,14 +24,10 @@ namespace WebApplication1.Controllers
         {
             return "value";
         }
-        
-        /// <summary>
-        /// Post sample method.
-        /// </summary>
-        /// <param name="pRequest">Class object</param>
+
+        // POST api/values
         [HttpPost]
-        [SwagerApi(typeof(PostRequest))]        
-        public void Post([FromBody] PostRequest pRequest)
+        public void Post([FromBody]string value)
         {
         }
 

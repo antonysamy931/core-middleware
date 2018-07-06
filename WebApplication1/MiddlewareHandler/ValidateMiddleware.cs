@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DTO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -62,43 +64,51 @@ namespace MiddlewareHandler
                 }
                 else
                 {
-                    string jsonBody = string.Empty;                    
-                    using(var injectedRequestStream = new MemoryStream())
+                    string jsonBody = string.Empty;
+                    var injectedRequestStream = new MemoryStream();                    
+                    using (var bodyReader = new StreamReader(context.Request.Body))
                     {
-                        using (var bodyReader = new StreamReader(context.Request.Body))
-                        {
-                            jsonBody = bodyReader.ReadToEnd();                            
-                            var bytesToWrite = Encoding.UTF8.GetBytes(jsonBody);
-                            injectedRequestStream.Write(bytesToWrite, 0, bytesToWrite.Length);
-                            injectedRequestStream.Seek(0, SeekOrigin.Begin);
-                            context.Request.Body = injectedRequestStream;
-                        }
+                        jsonBody = bodyReader.ReadToEnd();
+                        var bytesToWrite = Encoding.UTF8.GetBytes(jsonBody);
+                        injectedRequestStream.Write(bytesToWrite, 0, bytesToWrite.Length);
+                        injectedRequestStream.Seek(0, SeekOrigin.Begin);
+                        context.Request.Body = injectedRequestStream;
                     }
-                    if (!string.IsNullOrEmpty(jsonBody))
+                    XDocument doc = null;
+                    if (!string.IsNullOrEmpty(jsonBody) && context.Request.ContentType.Contains("json"))
                     {
-                        XDocument doc = ToXDocument(JsonConvert.DeserializeXmlNode(jsonBody, ExpectedType));
-                        doc.Validate(_schemaSet, ValidationHandler);
-                        if(validationErrorMessages != null && validationErrorMessages.Count > 0)
+                        doc = ToXDocument(JsonConvert.DeserializeXmlNode(jsonBody, ExpectedType));                        
+                    }
+                    else if(!string.IsNullOrEmpty(jsonBody) && context.Request.ContentType.Contains("xml"))
+                    {                        
+                        doc = XDocument.Parse(jsonBody);
+                        doc.Root.Name = ExpectedType;
+                    }
+
+                    doc.Validate(_schemaSet, ValidationHandler);
+                    if (validationErrorMessages != null && validationErrorMessages.Count > 0)
+                    {
+                        string ErrorMessage = string.Join(Environment.NewLine, validationErrorMessages.ToArray());
+                        context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                        context.Response.ContentType = "application/json";
+                        var errorMessage = new
                         {
-                            string ErrorMessage = string.Join(Environment.NewLine, validationErrorMessages.ToArray());
-                            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                            context.Response.ContentType = "application/json";
-                            var errorMessage = new
-                            {
-                                Reason = ErrorMessage
-                            };
-                            await context.Response.WriteAsync(JsonConvert.SerializeObject(errorMessage), Encoding.UTF8);
-                            return;
-                        }
+                            Reason = ErrorMessage
+                        };
+                        await context.Response.WriteAsync(JsonConvert.SerializeObject(errorMessage), Encoding.UTF8);
+                        return;
                     }
                 }
-            }            
-            await _next.Invoke(context);                       
+            }
+            await _next.Invoke(context);
         }
 
         private string GetExpectedType(HttpRequest request)
         {
-            return Configuration[request.Path.Value.ToLower()];
+            string ExpectedType = Configuration[request.Path.Value.ToLower()];
+            if (request.ContentType.Contains("xml"))
+                ExpectedType = ExpectedType + "XML";
+            return ExpectedType;
         }
 
         private XDocument ToXDocument(XmlDocument xmlDocument)
@@ -112,7 +122,7 @@ namespace MiddlewareHandler
 
         void ValidationEventHandler(object sender, ValidationEventArgs e)
         {
-            String errorMessage = e.Message;            
+            String errorMessage = e.Message;
             validationErrorMessages = validationErrorMessages ?? new List<string>();
             validationErrorMessages.Add(errorMessage);
         }

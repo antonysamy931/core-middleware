@@ -1,12 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="PostRequest" nillable="true" type="PostRequestType"/>
+  <xs:element name="PostRequestXML" nillable="true" type="PostRequestTypeXML" />
 
   <xs:complexType name="PostRequestType">
     <xs:sequence>
       <xs:element minOccurs="1" maxOccurs="1" name="Name" type="xs:string" />
       <xs:element minOccurs="1" maxOccurs="1" name="Last" type="xs:string" />
+      <xs:element maxOccurs="unbounded" name="Documents" type="DocumentInfo" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DocumentInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PostRequestTypeXML">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Last" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Documents" type="DocumentInfoArray" />
     </xs:sequence>
   </xs:complexType>
   
+  <xs:complexType name="DocumentInfoArray">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DocumentInfo" type="DocumentInfo" />      
+    </xs:sequence>
+  </xs:complexType>
+  
+
+  <!--<xs:complexType name="DocumentInfoXML">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>-->
+
 </xs:schema>
