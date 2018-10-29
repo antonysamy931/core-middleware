@@ -33,6 +33,19 @@ namespace DTO
                 }
             };
         }
+
+        /*
+         * <PostRequest>
+	            <Name>test</Name>
+	            <Last>test</Last>
+	            <Documents>
+		            <DocumentInfo>
+			            <Name>test</Name>
+			            <Description>tets</Description>
+		            </DocumentInfo>
+	            </Documents>
+            </PostRequest>
+         */
     }
 
     public class DocumentInfo

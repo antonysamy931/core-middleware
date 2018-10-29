@@ -59,7 +59,7 @@ namespace WebApplication1
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseVaidateMiddleware(Configuration);
+            //app.UseVaidateMiddleware(Configuration);
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
